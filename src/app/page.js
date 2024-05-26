@@ -1,9 +1,23 @@
-import React from 'react'
+const API_KEY = process.env.API_KEY;
 
-const Home = () => {
-  return (
-    <div>Home</div>
-  )
+import Result from "@/components/Result";
+import React from "react";
+
+export default async function Home({ searchParams }) {
+  console.log("🚀 ~ Home ~ searchParams:", searchParams)
+  const genre = searchParams?.genre || "fetchTrending";
+  const res = await fetch(
+    `https://api.themoviedb.org/3${
+      genre === "fetchTopRated" ? "/movie/top_rated" : "/trending/all/week"
+    }?api_key=${API_KEY}&language=en-US&page=1`
+  );
+
+  const data = await res.json();
+  if (!res.ok) {
+    throw new Error(data.message || "Failed to fetch data!");
+  }
+  const result = data.results;
+  return <div>
+    <Result result={result} />
+  </div>;
 }
-
-export default Home

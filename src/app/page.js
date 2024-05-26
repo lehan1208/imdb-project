@@ -4,7 +4,6 @@ import Result from "@/components/Result";
 import React from "react";
 
 export default async function Home({ searchParams }) {
-  console.log("🚀 ~ Home ~ searchParams:", searchParams)
   const genre = searchParams?.genre || "fetchTrending";
   const res = await fetch(
     `https://api.themoviedb.org/3${

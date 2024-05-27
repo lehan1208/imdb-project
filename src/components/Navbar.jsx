@@ -2,13 +2,16 @@
 import Link from "next/link";
 import React from "react";
 import { useSearchParams } from "next/navigation";
+import {Suspense} from "react";
 
 export default function Navbar() {
   return (
-    <div className="navbar-component flex gap-6 dark:bg-gray-600 bg-amber-50 p-4 justify-center lg:text-lg">
-      <NavbarItem title="Trending" param="fetchTrending" />
-      <NavbarItem title="Top Rated" param="fetchTopRated" />
-    </div>
+    <Suspense>
+      <div className="navbar-component flex gap-6 dark:bg-gray-600 bg-amber-50 p-4 justify-center lg:text-lg">
+        <NavbarItem title="Trending" param="fetchTrending" />
+        <NavbarItem title="Top Rated" param="fetchTopRated" />
+      </div>
+    </Suspense>
   );
 }
 
